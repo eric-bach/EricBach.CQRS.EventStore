@@ -56,7 +56,7 @@ namespace EricBach.CQRS.EventStore
 
             foreach (var @event in uncommittedChanges)
             {
-                var desEvent = Utilities.ChangeTo(@event, @event.GetType());
+                var desEvent = ChangeTo(@event, @event.GetType());
 
                 // TODO Publish to SQS
                 //_eventBus.Publish(desEvent);
@@ -89,6 +89,11 @@ namespace EricBach.CQRS.EventStore
             _snapshots.Add(snapshot);
 
             return Task.CompletedTask;
+        }
+
+        private static dynamic ChangeTo(dynamic source, Type dest)
+        {
+            return Convert.ChangeType(source, dest);
         }
     }
 }
