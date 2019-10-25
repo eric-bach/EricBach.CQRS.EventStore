@@ -54,7 +54,7 @@ namespace EricBach.CQRS.EventStore
 
         public async Task SaveAsync(AggregateRoot aggregate)
         {
-            Logger.Log("Preparing to save aggregate to DynamoDB");
+            Logger.Log($"Preparing to save aggregate {aggregate.Id} to DynamoDB");
 
             var uncommittedChanges = aggregate.GetUncommittedChanges();
             var version = aggregate.Version;
@@ -85,9 +85,9 @@ namespace EricBach.CQRS.EventStore
                         }
                     }
 
-                    Logger.Log("Saving aggregate to DynamoDB");
+                    Logger.Log($"Saving aggregate to DynamoDB");
                     await eventTable.PutItemAsync(record);
-                    Logger.Log("Successfully saved aggregate to DynamoDB");
+                    Logger.Log($"Successfully saved aggregate to DynamoDB");
                 }
                 catch (Exception ex)
                 {
