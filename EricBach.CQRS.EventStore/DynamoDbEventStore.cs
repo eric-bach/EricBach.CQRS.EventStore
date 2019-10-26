@@ -104,8 +104,7 @@ namespace EricBach.CQRS.EventStore
                     var originator = (ISnapshot)aggregate;
 
                     var snapshot = originator.GetSnapshot();
-                    snapshot.Version = version;
-
+                    
                     await SaveSnapshotAsync(snapshot);
                 }
             }
