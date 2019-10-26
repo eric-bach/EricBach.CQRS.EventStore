@@ -7,5 +7,6 @@ namespace EricBach.CQRS.EventStore.Snapshots
         public Guid Id { get; set; }
         public int Version { get; set; }
         public int EventVersion { get; set; }
+        public DateTime Timestamp { get; set; }
     }
 }

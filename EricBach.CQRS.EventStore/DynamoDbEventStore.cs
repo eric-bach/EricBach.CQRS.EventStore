@@ -62,6 +62,7 @@ namespace EricBach.CQRS.EventStore
             foreach (var @event in uncommittedChanges)
             {
                 @event.Version = ++version;
+                @event.Timestamp = DateTime.UtcNow;
 
                 // Write event to DynamoDB
                 try
@@ -104,6 +105,7 @@ namespace EricBach.CQRS.EventStore
                     var originator = (ISnapshot)aggregate;
 
                     var snapshot = originator.GetSnapshot();
+                    snapshot.Timestamp = DateTime.UtcNow;
                     
                     await SaveSnapshotAsync(snapshot);
                 }

@@ -39,6 +39,7 @@ namespace EricBach.CQRS.EventStore
             foreach (var @event in uncommittedChanges)
             {
                 @event.Version = ++version;
+                @event.Timestamp = DateTime.UtcNow;
 
                 _events.Add(@event);
 
